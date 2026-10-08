@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-export default function Composer({onSend} ) {
+export default function Composer({onSend, onTypingChange}) {
   const [draft, setDraft] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
 
   function send() {
     const text = draft.trim();
@@ -34,8 +35,12 @@ export default function Composer({onSend} ) {
        value={draft}
        onChange={(e) => setDraft(e.target.value)}
        onKeyDown={handleKeyDown}
+       onFocus={() => onTypingChange(true)}
+       onBlur={() => onTypingChange(false)}
        />
       <button type="submit">Send</button>
+      {isTyping && <span className="typing"> You are typing...</span>}
     </form>
+    
   );
 }

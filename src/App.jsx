@@ -17,6 +17,8 @@ export default function App() {
 
   const [messages, setMessages] = useState(SEED_MESSAGES);
 
+  const [isTyping, setIsTyping] = useState(false);
+
   function handleSend(text) {
     const message = { id: crypto.randomUUID(), author: "You", time: now(), hearts: 0, text };
     setMessages({...messages, [activeId]: [...messages[activeId], message] });
@@ -30,9 +32,9 @@ export default function App() {
       onSelectChannel={setActiveId}
       />
       <main className="main">
-        <ChatHeader channel={channel} />
+        <ChatHeader channel={channel} isTyping={isTyping} />
         <MessageList messages={messages[activeId]} />
-        <Composer onSend={handleSend} />
+        <Composer onSend={handleSend} onTypingChange={setIsTyping} />
       </main>
     </div>
   );
