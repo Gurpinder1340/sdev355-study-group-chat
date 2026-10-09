@@ -24,6 +24,12 @@ export default function App() {
     setMessages({...messages, [activeId]: [...messages[activeId], message] });
   }
 
+    function handleReact(id) {
+        const updated = messages[activeId].map((m) =>
+          m.id === id ? {...m, hearts: m.hearts + 1} : m
+        );
+      setMessages({ ...messages, [activeId]: updated});
+    }
   return (
     <div className="app">
       <Sidebar 
