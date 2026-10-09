@@ -1,4 +1,4 @@
-export default function PinnedBar({ message }) {
+export default function PinnedBar({ message, onUnpin }) {
   if (!message) {
     return null;
   }
@@ -9,6 +9,7 @@ export default function PinnedBar({ message }) {
       <span className="pinned-text">
         {message.author}: {message.text}
       </span>
+      <button onClick={onUnpin}>Unpin</button>
     </div>
   );
 }
